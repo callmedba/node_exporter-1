@@ -1,4 +1,4 @@
-#写在前面
+# 写在前面
 
 有很多小公司目前都使用了阿里云aliyun的rds数据库， 但是对于rds的监控基本上都是使用的阿里云的云监控系统，
 没有自己的监控插件。 为了解决阿里云锁死小公司监控技术的问题，本人基于流行的Prometheus监控系统，在其
@@ -207,6 +207,7 @@ There is a [community-supplied COPR repository](https://copr.fedorainfracloud.or
 [goreportcard]: https://goreportcard.com/report/github.com/prometheus/node_exporter
 
 # Example config for node_exporter work with prometheus(v2.5)
+Prometheus配置：
 ```
   - job_name: db-mysql-node 
     scrape_interval: 30s
@@ -228,3 +229,48 @@ There is a [community-supplied COPR repository](https://copr.fedorainfracloud.or
       - target_label: __address__
         replacement: exporter-address:9100
 ```
+
+node_exporter配置：
+```
+./node_exporter \
+--no-collector.arp \
+--no-collector.bcache \
+--no-collector.bonding \
+--no-collector.conntrack \
+--collector.cpu \
+--collector.cpuRds \
+--no-collector.cpufreq \
+--collector.diskstats \
+--no-collector.edac \
+--no-collector.entropy \
+--no-collector.filefd \
+--no-collector.filesystem \
+--no-collector.hwmon \
+--no-collector.infiniband \
+--no-collector.ipvs \
+--no-collector.loadavg \
+--no-collector.mdadm \
+--collector.meminfo \
+--collector.meminfoRds \
+--no-collector.netclass \
+--no-collector.netdev \
+--no-collector.netstat \
+--no-collector.nfs \
+--no-collector.nfsd \
+--no-collector.pressure \
+--no-collector.sockstat \
+--no-collector.stat \
+--no-collector.textfile \
+--no-collector.time \
+--no-collector.timex \
+--no-collector.uname \
+--no-collector.vmstat \
+--no-collector.xfs \
+--no-collector.zfs \
+--collector.iopsRds \
+--web.max-requests=0 \
+--log.level="info"
+```
+
+更多详细内容，参考本人的简书文档：
+
