@@ -207,6 +207,17 @@ There is a [community-supplied COPR repository](https://copr.fedorainfracloud.or
 [goreportcard]: https://goreportcard.com/report/github.com/prometheus/node_exporter
 
 # Example config for node_exporter work with prometheus(v2.5)
+由于涉及到阿里云的api授权，需要提供accessKeyId和 accessSecret，所以本项目不提供二进制文件，大家将
+rds_common 里的配置
+```
+const (
+	regionId        = "cn-hangzhou"
+	accessKeyId     = "accessKeyId"
+	accessKeySecret = "accessKeySecret"
+)
+```
+修改好后，自己进行编译即可。
+
 Prometheus配置：
 ```
   - job_name: db-mysql-node 
