@@ -1,4 +1,5 @@
 #写在前面
+
 有很多小公司目前都使用了阿里云aliyun的rds数据库， 但是对于rds的监控基本上都是使用的阿里云的云监控系统，
 没有自己的监控插件。 为了解决阿里云锁死小公司监控技术的问题，本人基于流行的Prometheus监控系统，在其
 监控插件源代码的起初上进行了修改。这个开源node_exporter 的开源项目是其中之一，旨在解决rds机器层面的数据
@@ -205,7 +206,7 @@ There is a [community-supplied COPR repository](https://copr.fedorainfracloud.or
 [quay]: https://quay.io/repository/prometheus/node-exporter
 [goreportcard]: https://goreportcard.com/report/github.com/prometheus/node_exporter
 
-# Example config for node_exporter work with prometheus
+# Example config for node_exporter work with prometheus(v2.5)
 ```
   - job_name: db-mysql-node 
     scrape_interval: 30s
