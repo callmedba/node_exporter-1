@@ -1,3 +1,11 @@
+#写在前面
+有很多小公司目前都使用了阿里云aliyun的rds数据库， 但是对于rds的监控基本上都是使用的阿里云的云监控系统，
+没有自己的监控插件。 为了解决阿里云锁死小公司监控技术的问题，本人基于流行的Prometheus监控系统，在其
+监控插件源代码的起初上进行了修改。这个开源node_exporter 的开源项目是其中之一，旨在解决rds机器层面的数据
+采集问题， 调用aliyun的API， 实现一个exporter监控多个rds的功能。
+本项目和本人另外一个开源项目mysqld_exporter 都是基于官方prometheus 插件直接修改，基于go语言，
+稳定性和性能都可以保障，大家可以放心使用。
+
 # Node exporter
 
 [![CircleCI](https://circleci.com/gh/prometheus/node_exporter/tree/master.svg?style=shield)][circleci]
@@ -60,7 +68,10 @@ uname | Exposes system information as provided by the uname system call. | FreeB
 vmstat | Exposes statistics from `/proc/vmstat`. | Linux
 xfs | Exposes XFS runtime statistics. | Linux (kernel 4.4+)
 zfs | Exposes [ZFS](http://open-zfs.org/) performance statistics. | [Linux](http://zfsonlinux.org/), Solaris
-
+cpuRds | Exposes Rds  cpu info runtime statistics. | [阿里云API](https://help.aliyun.com/document_detail/26226.html?spm=a2c4g.11186623.6.1485.23983189fxqVOa)
+diskRdsStats | Exposes Rds  disk info runtime statistics. | [阿里云API](https://help.aliyun.com/document_detail/26226.html?spm=a2c4g.11186623.6.1485.23983189fxqVOa)
+meminfoRds | Exposes Rds  memory info runtime statistics. | [阿里云API](https://help.aliyun.com/document_detail/26226.html?spm=a2c4g.11186623.6.1485.23983189fxqVOa)
+iopsRds | Exposes Rds  iops info  runtime statistics. | [阿里云API](https://help.aliyun.com/document_detail/26226.html?spm=a2c4g.11186623.6.1485.23983189fxqVOa)
 ### Disabled by default
 
 The perf collector may not work by default on all Linux systems due to kernel
@@ -193,3 +204,26 @@ There is a [community-supplied COPR repository](https://copr.fedorainfracloud.or
 [circleci]: https://circleci.com/gh/prometheus/node_exporter
 [quay]: https://quay.io/repository/prometheus/node-exporter
 [goreportcard]: https://goreportcard.com/report/github.com/prometheus/node_exporter
+
+# Example config for node_exporter work with prometheus
+```
+  - job_name: db-mysql-node 
+    scrape_interval: 30s
+    params:
+        "collect[]": ["cpuRds", "meminfoRds", "diskRdsStats", "iopsRds"]
+
+    consul_sd_configs:
+      - server: 'consul-address'
+        services: ["db-mysql"]
+        tag: "hz-ali"
+        tag_separator: "|"
+
+    relabel_configs:
+
+      - source_labels: [__meta_consul_service_id]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: exporter-address:9100
+```
