@@ -283,5 +283,8 @@ node_exporter配置：
 --log.level="info"
 ```
 
-更多详细内容，参考本人的简书文档：
+更多详细内容，参考本人的相关文档：
+简书：[rds数据库本地化改造](https://www.jianshu.com/p/c38f5d039bd1) <br>
+点我达博客：[rds数据库本地化改造](http://tech.dianwoda.com/2020/01/06/dian-wo-da-rdsjian-kong-xi-tong-gai-zao/) <br>
+微信公众号：[rds数据库本地化改造](https://mp.weixin.qq.com/s?__biz=MzAwNDU1Njc0OA==&mid=2247483652&idx=1&sn=b1573a3d08bb53fb8df3a6b272690d82&chksm=9b2b53a7ac5cdab13dd54033f60393fdbe8e1a73dacfa63bc2bfa8f2711f03bd31b5bb0c9a20&token=1062910638&lang=zh_CN#rd)
 
