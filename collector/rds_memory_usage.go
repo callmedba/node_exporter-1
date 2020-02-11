@@ -98,6 +98,5 @@ func (c *meminfoRDSCollector) Update(ch chan<- prometheus.Metric) error {
 			[]string{"alias"}, nil,
 		),
 		metricType, memUsageInfo, alias)
-
 	return nil
 }
