@@ -5,7 +5,7 @@
 监控插件源代码的起初上进行了修改。这个开源node_exporter 的开源项目是其中之一，旨在解决rds机器层面的数据
 采集问题， 调用aliyun的API， 实现一个exporter监控多个rds的功能。
 本项目和本人另外一个开源项目mysqld_exporter 都是基于官方prometheus 插件直接修改，基于go语言，
-稳定性和性能都可以保障，大家可以放心使用。
+稳定性和性能都可以保障，大家可以放心使用!
 
 # Node exporter
 
